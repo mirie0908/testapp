@@ -1,0 +1,15 @@
+2017/02/19(sun)
+- core.cljで main のあとにdefn した関数をmain中で呼ぶとエラー。
+呼ばれる前にすなわちmainの前にdefn定義を書かなければならない。
+
+- accessのテーブルの一括削除までできるようになった。
+以下
+[masa@localhost testapp]$ ./runtestapp.sh
+MLtougou.xlsmのフルパス: /home/masa/tmpmountp/プロジェクトT/2.案件用資料/5.アップデート/VmInventry2/MLtougou.xlsm
+guestOSinfo.mdbのフルパス： /home/masa/tmpmountp/プロジェクトT/2.案件用資料/5.アップデート/VmInventry2/guestOSinfo.mdb
+対象テーブル： ML56
+2ファイルとも存在します。
+log4j:WARN No appenders could be found for logger (com.healthmarketscience.jackcess.Index).
+log4j:WARN Please initialize the log4j system properly.
+テーブル ML56 の 1109 レコードを全て削除します。
+テーブル ML56 の 1109 レコードを全て削除しました。

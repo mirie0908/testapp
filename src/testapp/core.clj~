@@ -1,0 +1,36 @@
+(ns testapp.core
+  (:gen-class))
+
+(use 'dk.ative.docjure.spreadsheet)
+(use 'clojess.core)
+
+(defn -main
+  [& args]
+  (println "Hello world!"))
+
+;;###################
+;;docjure test
+;;###################
+;(->> (load-workbook "MLtougou.xlsm")
+;     (select-sheet "MLLight03")
+;     (select-columns {:B :搭載基盤, :C :ゲストOSNo}))
+;;読めた
+
+;;###################
+;; jackcessutil test
+;;###################
+(require 'testapp.jackcessutil)
+
+;;(testapp.jackcessutil/testfn)
+
+;; delete-rows test実行
+(let [db (open-db "/home/masa/tmpmountp/プロジェクトT/2.案件用資料/5.アップデート/VmInventry2/testDB.mdb")
+      tbl-name (str "testTable")]
+  ;; 全rows削除前のrow数
+  (printf "rows before delete-rows : %d\n" (. (table db tbl-name) getRowCount))
+  ;; 全rowsの削除(delete-rows) の実行
+  (testapp.jackcessutil/delete-rows db tbl-name)
+  ;; 全rows削除後のrow数
+  (printf "rows after delete-rows : %d\n" (. (table db tbl-name) getRowCount))
+  (. db close))
+

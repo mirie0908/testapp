@@ -1,0 +1,14 @@
+;; docjure util
+;; 2017/2/8
+(ns testapp.docjureutil)
+
+(use 'dk.ative.docjure.spreadsheet)
+
+;;test
+(let
+    [workbookfile "/home/masa/tmpmountp/プロジェクトT/2.案件用資料/5.アップデート/VmInventry2/MLtougou.xlsm"
+     sheetname "MLLight03"]
+  (count (->> (load-workbook workbookfile)
+       (select-sheet sheetname)
+       (select-columns {:B :搭載基盤, :C :ゲストOSNo, :L :システム名})))) ;;#=> row を count = 283行
+       

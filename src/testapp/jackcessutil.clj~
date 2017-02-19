@@ -1,0 +1,45 @@
+;; jackcess util
+;; 2017/1/20
+(ns testapp.jackcessutil)
+;;  (:import com.healthmarketscience.jackcess.CursorBuilder))
+
+(use 'clojess.core)
+(use 'clojess.util)
+
+;; clojess test
+(defn testfn
+  []
+  (println (table-names (open-db "/home/masa/testapp/VmInventry2/guestOSinfo.mdb"))))
+
+;; ここでできんといかんのは２つ。(1)tableの全rec削除。(2)tableにrecの逐次INSERT
+
+
+;; 2017.1.30
+;; delete all rows
+(defn delete-rows
+  [db tbl-name]
+  (let [tbl (table db tbl-name)
+        crsr (.getDefaultCursor tbl)]
+    (if (> (.getRowCount tbl) (int 0))
+      ;; true recがある
+      ;;(for [r1 (rows tbl)] (.deleteRow r1 tbl)) ;これもだめ。
+      ;;(for [r1 (rows tbl)] ((.deleteRow tbl) r1)) ;だめ。table.implに .deleteRowメソッドないと。
+      ;;(for [r1 (rows tbl)] (. tbl deleteRow r1))
+      (do
+        (. crsr beforeFirst)
+        (while (. crsr getNextRow) (. crsr deleteCurrentRow))
+        (. db flush))
+      ;; else recない
+      (println "テーブル %s にはrecありません。\n" tbl-name))))
+
+;; test実行
+(let [db (open-db "/home/masa/tmpmountp/プロジェクトT/2.案件用資料/5.アップデート/VmInventry2/testDB.mdb")
+      tbl-name (str "testTable")]
+  (delete-rows db tbl-name)
+  (. db close))
+
+;;実行結果確認
+(let
+    [testtbl (table (open-db "/home/masa/tmpmountp/プロジェクトT/2.案件用資料/5.アップデート/VmInventry2/testDB.mdb") "testTable")]
+  (.getRowCount testtbl))
+
