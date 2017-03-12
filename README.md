@@ -1,6 +1,6 @@
 # testapp
 
-仮想化統合サーバ(34,56,Light1-5,新基盤）のユーザMLのExcel(MLtougou.xlsm)を
+仮想化サーバのユーザMLのExcel(MLtougou.xlsm)を
 Access(guestOSinfo.mdb)のテーブルにコピーする。
 
 ## Usage
