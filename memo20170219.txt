@@ -13,3 +13,23 @@ log4j:WARN No appenders could be found for logger (com.healthmarketscience.jackc
 log4j:WARN Please initialize the log4j system properly.
 テーブル ML56 の 1109 レコードを全て削除します。
 テーブル ML56 の 1109 レコードを全て削除しました。
+
+- gitnubにリポジトリ持つようにしたい。
+githubにリポジトリ作成。mirie0908/testapp
+いまこのローカルに先に作っているソースをどうやってgithubのリポジトリにあげればいいのか。
+
+githubページのガイドどおりにこうやって、。
+[masa@localhost testapp]$ git add project.clj
+[masa@localhost testapp]$ git add memo20170219.txt
+[masa@localhost testapp]$ git add runtestapp.sh
+[masa@localhost testapp]$ git commit -m "first commit"
+
+そしてこうやってみたが、なんかhttpsにアクセスできんといってエラー。
+[masa@localhost testapp]$ git remote add origin https://github.com/mirie0908/testapp.git
+[masa@localhost testapp]$ git push -u origin master
+error: The requested URL returned error: 403 Forbidden while accessing https://github.com/mirie0908/testapp.git/info/refs
+
+fatal: HTTP request failed
+
+Qiitaなのに、git push で403でエラー　の話でてる。
+Qiitaは見れないがここが参考になるか?
